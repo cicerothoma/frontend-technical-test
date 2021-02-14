@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { newCard } from './card.actions';
 
 export const initialState = {
   creditCardNumber: 'Default Card Number',
@@ -9,10 +8,7 @@ export const initialState = {
   amount: 30000,
 };
 
-const _cardReducer = createReducer(
-  initialState
-  // on(newCard, (state) => state)
-);
+const _cardReducer = createReducer(initialState);
 
 export function cardReducer(state, action) {
   return _cardReducer(state, action);
