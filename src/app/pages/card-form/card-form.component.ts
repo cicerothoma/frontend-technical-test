@@ -67,26 +67,9 @@ export class CardFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  getFormValidationErrors() {
-    Object.keys(this.creditCardPaymentForm.controls).forEach((key) => {
-      const controlErrors: ValidationErrors = this.creditCardPaymentForm.get(
-        key
-      ).errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach((keyError) => {
-          console.log(
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
-            controlErrors[keyError]
-          );
-        });
-      }
-    });
-  }
-
   ngOnInit(): void {}
 
   paymentCall(): void {
-    this.getFormValidationErrors();
     // Get The Moment Date object and change it to a timestamp
     const dateTimestamp = this.creditCardPaymentForm
       .get('expirationDate')
@@ -114,6 +97,10 @@ export class CardFormComponent implements OnInit, OnDestroy {
             });
           }
         });
+    } else {
+      this.matSnackBar.open('Form Not Valid', 'close', {
+        duration: 6000,
+      });
     }
   }
 
