@@ -76,6 +76,7 @@ export class CardFormComponent implements OnInit, OnDestroy {
           this.creditCardPaymentForm.value
         )
         .subscribe((value) => {
+          // Logging value to confirm the map RxJS works
           console.log(value);
           if (Object.keys(value).length > 1) {
             this.matSnackBar.open('Card Details Sent Successfully', 'Close', {
