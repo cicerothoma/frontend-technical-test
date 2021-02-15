@@ -1,3 +1,12 @@
 .example-container .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
+
+form {
+  display: grid;
+  justify-content: space-around;
+}
+
+.center {
+  padding: 30px 50px;
+}

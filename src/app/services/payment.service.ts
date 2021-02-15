@@ -15,9 +15,9 @@ export class PaymentService {
       // Uneccessary but just displaying RxJS operator
       map((value) => ({
         creditCardNumber: value.creditCardNumber + 1,
-        cardHolder: value.cardHolder + 'new',
+        cardHolder: value.cardHolder + ' new',
         expirationDate: value.expirationDate + 1,
-        amount: value.amount + 100,
+        amount: +value.amount + 100,
         securityCode: value.securityCode ? value.securityCode : '',
       }))
     );

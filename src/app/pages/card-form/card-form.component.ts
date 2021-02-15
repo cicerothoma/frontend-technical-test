@@ -1,16 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ValidationErrors,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PaymentService } from './../../services/payment.service';
 import { DateValidator } from './../../validators/date.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-card-form',
@@ -20,6 +13,12 @@ import * as _ from 'lodash';
 export class CardFormComponent implements OnInit, OnDestroy {
   creditCardPaymentForm: FormGroup;
   creditCardPaymentSubscription: Subscription;
+  allowedKeys: string[] = [
+    'creditCardNumber',
+    'cardHolder',
+    'expirationDate',
+    'amount',
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -70,35 +69,26 @@ export class CardFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   paymentCall(): void {
-    // Get The Moment Date object and change it to a timestamp
-    const dateTimestamp = this.creditCardPaymentForm
-      .get('expirationDate')
-      .value.valueOf();
-    // Replace The Moment Date object with the timestamp
-    this.creditCardPaymentForm.get('expirationDate').patchValue(dateTimestamp);
     if (this.creditCardPaymentForm.valid) {
       this.creditCardPaymentSubscription = this.paymentService
-        .sendPostRequest('', this.creditCardPaymentForm.value)
+        .sendPostRequest(
+          'https://stark-tor-49299.herokuapp.com/',
+          this.creditCardPaymentForm.value
+        )
         .subscribe((value) => {
-          if (
-            _.has(value, [
-              'creditCardNumber',
-              'cardHolder',
-              'expirationDate',
-              'amount',
-            ])
-          ) {
-            this.matSnackBar.open('Valid Card Details', 'close', {
+          console.log(value);
+          if (Object.keys(value).length > 1) {
+            this.matSnackBar.open('Card Details Sent Successfully', 'Close', {
               duration: 6000,
             });
           } else {
-            this.matSnackBar.open('Invalid Card Details', 'close', {
+            this.matSnackBar.open('Card Details Send Fail', 'close', {
               duration: 6000,
             });
           }
         });
     } else {
-      this.matSnackBar.open('Form Not Valid', 'close', {
+      this.matSnackBar.open('Form Not Valid', 'Close', {
         duration: 6000,
       });
     }

@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer } from '@ngrx/store';
 
 export const initialState = {
   creditCardNumber: 'Default Card Number',

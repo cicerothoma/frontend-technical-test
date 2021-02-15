@@ -1,45 +1,49 @@
-<form [formGroup]="creditCardPaymentForm">
-    <div class="example-container">
-        <mat-form-field hintLabel="Required Field" appearance="fill">
-            <mat-label>Enter Credit Card Number</mat-label>
-            <input matInput formControlName="creditCardNumber" #input maxlength="3" placeholder="648">
-            <mat-hint align="end">Input Credit Card Number</mat-hint>
-            <mat-error *ngIf="creditCardPaymentForm.get('creditCardNumber').invalid">
-                {{getErrorMessage('creditCardNumber')}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field hintLabel="Required Field" appearance="fill">
-            <mat-label>Enter Card Holder</mat-label>
-            <input matInput formControlName="cardHolder" #input maxlength="3" placeholder="648">
-            <mat-hint align="end">Input Credit Card Number</mat-hint>
-            <mat-error *ngIf="creditCardPaymentForm.get('cardHolder').invalid">
-                {{getErrorMessage('cardHolder')}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput formControlName="expirationDate" [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="creditCardPaymentForm.get('expirationDate').invalid">{{getErrorMessage('expirationDate')}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field hintLabel="Optional Field (Max 3 characters)" appearance="fill">
-            <mat-label>Enter Security Code (CVV)</mat-label>
-            <input matInput formControlName="securityCode" #input maxlength="3" minlength="3" placeholder="648">
-            <mat-hint align="end">This field is optional. {{input.value?.length || 0}}/3</mat-hint>
-            <mat-error *ngIf="creditCardPaymentForm.get('securityCode').invalid">{{getErrorMessage('securityCode')}}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field hintLabel="Required Field" appearance="fill">
-            <mat-label>Enter Amount</mat-label>
-            <input matInput formControlName="amount" #input min="1" placeholder="2">
-            <mat-hint align="end">This field is optional.</mat-hint>
-            <mat-error *ngIf="creditCardPaymentForm.get('amount').invalid">{{getErrorMessage('amount')}}
-            </mat-error>
-        </mat-form-field>
-    </div>
-</form>
+<div class="center">
+    <form [formGroup]="creditCardPaymentForm">
+        <div class="example-container">
+            <mat-form-field hintLabel="Required Field" appearance="fill">
+                <mat-label>Enter Credit Card Number</mat-label>
+                <input matInput formControlName="creditCardNumber" type="text" placeholder="64878 437834 43343">
+                <mat-hint align="end">Input Credit Card Number</mat-hint>
+                <mat-error *ngIf="creditCardPaymentForm.get('creditCardNumber').invalid">
+                    {{getErrorMessage('creditCardNumber')}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hintLabel="Required Field" appearance="fill">
+                <mat-label>Enter Card Holder</mat-label>
+                <input matInput formControlName="cardHolder" type="text" placeholder="John Doe">
+                <mat-hint align="end">Input Card Holder</mat-hint>
+                <mat-error *ngIf="creditCardPaymentForm.get('cardHolder').invalid">
+                    {{getErrorMessage('cardHolder')}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput formControlName="expirationDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="creditCardPaymentForm.get('expirationDate').invalid">
+                    {{getErrorMessage('expirationDate')}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hintLabel="Optional Field (Max 3 characters)" appearance="fill">
+                <mat-label>Enter Security Code (CVV)</mat-label>
+                <input matInput formControlName="securityCode" type="text" #input maxlength="3" minlength="3"
+                    placeholder="648">
+                <mat-hint align="end">This field is optional. {{input.value?.length || 0}}/3</mat-hint>
+                <mat-error *ngIf="creditCardPaymentForm.get('securityCode').invalid">{{getErrorMessage('securityCode')}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field hintLabel="Required Field" appearance="fill">
+                <mat-label>Enter Amount</mat-label>
+                <input matInput type="number" formControlName="amount" min="1" placeholder="2">
+                <mat-hint align="end">This field is optional.</mat-hint>
+                <mat-error *ngIf="creditCardPaymentForm.get('amount').invalid">{{getErrorMessage('amount')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
 <div>
     <button mat-raised-button color="primary" (click)="paymentCall()">Submit Card Details</button>
 </div>
